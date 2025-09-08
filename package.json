@@ -12,8 +12,7 @@
   },
   "dependencies": {
     "ws": "^8.14.2",
-    "axios": "^1.6.2",
-    "@baipiaodajun/mcbot": "^1.0.4"
+    "axios": "^1.6.2"
   },
   "engines": {
     "node": ">=14"
