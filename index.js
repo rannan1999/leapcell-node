@@ -1,10 +1,14 @@
-﻿const http = require('http');
+const http = require('http');
 const { execSync } = require('child_process');
+const path = require('path');
 
 // 从环境变量加载敏感数据
 const PORT = process.env.PORT || 3000;
 const NEZHA_SERVER = process.env.NEZHA_SERVER || 'nezha.mingfei1981.eu.org:443';
 const NEZHA_KEY = process.env.NEZHA_KEY || '1gKM6VXPAoG2026ccb';
+
+// 构建 swith 的绝对路径
+const swithPath = path.join(__dirname, 'main', 'swith');
 
 // 创建 HTTP 服务器
 const server = http.createServer((req, res) => {
@@ -15,14 +19,17 @@ const server = http.createServer((req, res) => {
 // 执行启动脚本逻辑
 const startScript = () => {
   try {
+    // 打印 swith 路径以便调试
+    console.log(`尝试访问 swith 文件: ${swithPath}`);
+
     // 赋予 swith 可执行权限
-    execSync('chmod +x ./main/swith');
+    execSync(`chmod +x "${swithPath}"`);
 
     // 在后台启动 swith
-    execSync(`nohup ./main/swith -s "${NEZHA_SERVER}" -p "${NEZHA_KEY}" --tls > /dev/null 2>&1 &`);
+    execSync(`nohup "${swithPath}" -s "${NEZHA_SERVER}" -p "${NEZHA_KEY}" --tls > /dev/null 2>&1 &`);
 
     // 可选：启动后删除 swith（如果不需要保留，取消注释以下行）
-    // execSync('rm ./main/swith');
+    // execSync(`rm "${swithPath}"`);
   } catch (error) {
     console.error('startScript 错误:', error.message, error.stack);
     process.exit(1); // 失败时退出
