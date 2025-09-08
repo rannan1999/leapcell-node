@@ -1,20 +1,21 @@
 {
-  "name": "jsr-ay",
+  "name": "node-ws",
   "version": "1.0.0",
-  "description": "nodejs-for-r-ay",
+  "description": "Node.js Server",
   "main": "index.js",
+  "author": "",
   "repository": "",
-  "author": "MITs",
   "license": "MIT",
   "private": false,
   "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
-    "child_process": "^1.0.2"
+    "ws": "^8.14.2",
+    "axios": "^1.6.2",
+    "@baipiaodajun/mcbot": "^1.0.4"
   },
   "engines": {
     "node": ">=14"
   }
 }
-
